@@ -61,7 +61,6 @@ public class Heap {
         Heap heap = new Heap(10);
         Random r = new Random();
         for(int i = 0; i < 100; i ++){
-//                heap.insert(i);
             heap.insert(r.nextInt(100));
         }
         while(!heap.isEmpty()){

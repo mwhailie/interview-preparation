@@ -1,13 +1,12 @@
 package edu.neu.practice.visa;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class Pagination {
 
-    public static String[] fetchItemsToDisplay(String[][] items,
-                                        int sortParameter, int sortOrder,
-                                        int x, int y) {
+    public static List<String> fetchItemsToDisplay(String[][] items,
+                                                   int sortParameter, int sortOrder,
+                                                   int x, int y) {
         int start = x * y;
         if(start > items.length){
             return null;
@@ -15,6 +14,13 @@ public class Pagination {
         Arrays.sort(items, new Comparator<String[]>(){
             @Override
             public int compare(String[] item1, String[] item2){
+                if(sortParameter == 0){
+                    if(sortOrder == 1){
+                        return item2[0].compareTo(item1[0]);
+                    }else{
+                        return item1[0].compareTo(item2[0]);
+                    }
+                }
                 int i1 = Integer.parseInt(item1[sortParameter]);
                 int i2 = Integer.parseInt(item2[sortParameter]);
                 if(sortOrder == 1){
@@ -24,13 +30,10 @@ public class Pagination {
                 }
             }
         });
-        String[] res = new String[x];
-        System.out.print("[");
+        List<String> res = new ArrayList<>();
         for(int i = 0; i < x && start + i < items.length; i ++){
-            res[i] = items[start + i][0];
-            System.out.print(res[i] + ", ");
+            res.add(items[start + i][0]);
         }
-        System.out.println("]");
         return res;
     }
     public static void main(String[] args) {

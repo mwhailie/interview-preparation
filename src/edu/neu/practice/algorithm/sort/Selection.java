@@ -3,16 +3,9 @@ package edu.neu.practice.algorithm.sort;
 import java.util.Random;
 
 public class Selection {
-    public static void insertionSort(int[] nums){
-        for(int i = 1; i < nums.length; i ++){
-            int j = i - 1;
-            while(j >= 0 && nums[j] > nums[i]){
-                swap(nums, j-- ,i--);
-            }
-        }
-    }
-    public void selectionSort(int[] nums){
-        for(int i = 0; i < nums.length; i ++){
+
+    public static void selectionSort(int[] nums){
+        for(int i = 0; i < nums.length - 1; i ++){
             int min = i + 1;
             for(int j = i + 1;j < nums.length; j ++){
                 if(nums[j] < nums[min]){
@@ -35,7 +28,7 @@ public class Selection {
         for(int i = 0; i < 100; i ++){
             nums[i] = r.nextInt(100);
         }
-        insertionSort(nums);
+        selectionSort(nums);
         for(int i = 0; i < 100; i ++){
             System.out.print(nums[i] + ", ");
         }
