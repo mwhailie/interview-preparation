@@ -2,7 +2,7 @@ package edu.neu.practice.algorithm.graph;
 
 import java.util.*;
 
-public class Dijkstra {
+public class DijkstraNetworkDelayTime {
         public int networkDelayTime(int[][] times, int N, int K) {
             List<List<int[]>> graph = new ArrayList<>();
             for(int i = 0; i <= N; i ++){
@@ -48,7 +48,7 @@ public class Dijkstra {
         }
 
     public static void main(String[] args) {
-        Dijkstra d = new Dijkstra();
+        DijkstraNetworkDelayTime d = new DijkstraNetworkDelayTime();
         int[][] times = new int[3][3];
         times[0] = new int[]{1, 2, 5};
         times[1] = new int[]{1, 3, 10};

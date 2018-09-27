@@ -85,9 +85,41 @@ public class InorderTraverse {
         return res;
     }
 
+    public class BSTIterator {
+
+        TreeNode root = null;
+        Stack<TreeNode> s ;
+        public BSTIterator(TreeNode root) {
+            if(root != null){
+                this.root = new TreeNode(root.value);
+            }
+            s = new Stack<>();
+            buildStack(root, s);
+        }
+
+        /** @return whether we have a next smallest number */
+        public boolean hasNext() {
+            return !s.isEmpty();
+        }
+
+        /** @return the next smallest number */
+        public int next() {
+            TreeNode mostLeft = s.pop();
+            buildStack(mostLeft.right, s);
+            return mostLeft.value;
+        }
+        private void buildStack(TreeNode root, Stack<TreeNode> s){
+            while(root != null){
+                s.push(root);
+                root = root.left;
+            }
+        }
+    }
 //       1
 //      /\
 //     2  3
 //     /\
 //    4  5
+
+
 }
