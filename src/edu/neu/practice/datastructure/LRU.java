@@ -5,6 +5,7 @@ import java.util.*;
 public class LRU {
     class ListNode{
         int key;
+        int increment;
         int val;
         ListNode prev;
         ListNode next;
