@@ -65,6 +65,22 @@ public class SlidingPuzzle {
         return new String(cs);
     }
 
+    public int[][] initiateBoard(int n, int m){
+        int[][] board = new int[n][m];
+        Random r = new Random(new Random().nextInt());
+        List<Integer> nums = new ArrayList<>();
+        for(int i = 0; i <= n * m; i ++){
+            nums.add(i);
+        }
+        for(int i = 0; i < n; i ++){
+            for(int j = 0; j < m; j ++){
+                int next = nums.remove(r.nextInt(nums.size()));
+                board[i][j] = next;
+            }
+        }
+        return board;
+    }
+
     public static void main(String[] args) {
         SlidingPuzzle slidingPuzzle = new SlidingPuzzle();
         System.out.println(slidingPuzzle.slidingPuzzle(new int[][]{{4,1,2},{5,0,3}}));

@@ -1,4 +1,4 @@
-package edu.neu.practice.companies.forusall;
+package edu.neu.practice.companies.airbnb;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

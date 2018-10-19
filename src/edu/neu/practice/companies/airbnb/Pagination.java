@@ -17,6 +17,7 @@ import java.util.*;
     https://leetcode.com/problems/rearrange-string-k-distance-apart/description/
  */
 public class Pagination {
+//   O(numOfPage * n) O(N^2)
     public List<String> displayPages(List<String> inputs, int pageSize) {
         List<String> displayPages = new ArrayList<>();
         if(inputs == null ||inputs.size() == 0){
