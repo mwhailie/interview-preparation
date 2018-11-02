@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class InorderTraverse {
 
-    public List<Integer> inOrderTraversalByRecursion(TreeNode root){
+    public static List<Integer> inOrderTraversalByRecursion(TreeNode root){
         if(root == null){
             return null;
         }
@@ -14,16 +14,16 @@ public class InorderTraverse {
         inOrderTraversalByRecursion(root, res);
         return res;
     }
-    private void inOrderTraversalByRecursion(TreeNode root, List<Integer> res){
+    private static void inOrderTraversalByRecursion(TreeNode root, List<Integer> res){
         if(root == null){
             return;
         }
-        inOrderTraversalByRecursion(root.left);
+        inOrderTraversalByRecursion(root.left, res);
         res.add(root.value);
-        inOrderTraversalByRecursion(root.right);
+        inOrderTraversalByRecursion(root.right, res);
     }
 
-    public List<Integer> inOrderTraversalByNonRecursion(TreeNode root){
+    public static List<Integer> inOrderTraversalByIterative(TreeNode root){
         List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         while(root != null){
@@ -48,7 +48,7 @@ public class InorderTraverse {
         }
         return res;
     }
-    public List<Integer> inOrderTraversalByNonRecursion2(TreeNode root){
+    public static List<Integer> inOrderTraversalByIterative2(TreeNode root){
         List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         while(root != null){
@@ -69,14 +69,14 @@ public class InorderTraverse {
         return res;
     }
 
-    public List<Integer> inOrderTraversalByNonRecursion3(TreeNode root){
+    public static List<Integer> inOrderTraversalByIterative3(TreeNode root){
         List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node = root;
         while (node != null || !stack.isEmpty()) {
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
             }
             node = stack.pop();
             res.add(node.value);
@@ -85,7 +85,7 @@ public class InorderTraverse {
         return res;
     }
 
-    public class BSTIterator {
+    public static class BSTIterator {
 
         TreeNode root = null;
         Stack<TreeNode> s ;
@@ -121,5 +121,42 @@ public class InorderTraverse {
 //     /\
 //    4  5
 
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        System.out.println(inOrderTraversalByRecursion(root));
+        System.out.println(inOrderTraversalByIterative(root));
+        System.out.println(inOrderTraversalByIterative2(root));
+        System.out.println(inOrderTraversalByIterative3(root));
+        BSTIterator b = new BSTIterator(root);
+        while(b.hasNext()){
+            System.out.print(b.next() + " ");
+        }
+        root = new TreeNode(1);
+        root.right = new TreeNode(2);
+        root.right.right = new TreeNode(3);
+        root.right.right.right = new TreeNode(4);
+        root.right.right.right.right = new TreeNode(5);
+        System.out.println(inOrderTraversalByRecursion(root));
+        System.out.println(inOrderTraversalByIterative(root));
+        System.out.println(inOrderTraversalByIterative2(root));
+        System.out.println(inOrderTraversalByIterative3(root));
+        root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.left.left = new TreeNode(4);
+        root.left.left.left.left = new TreeNode(5);
+        System.out.println(inOrderTraversalByRecursion(root));
+        System.out.println(inOrderTraversalByIterative(root));
+        System.out.println(inOrderTraversalByIterative2(root));
+        System.out.println(inOrderTraversalByIterative3(root));
+        b = new BSTIterator(root);
+        while(b.hasNext()){
+            System.out.print(b.next() + " ");
+        }
+    }
 
 }

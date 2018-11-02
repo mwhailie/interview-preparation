@@ -1,7 +1,6 @@
 package edu.neu.practice.algorithm.trie;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Trie {
     class TrieNode{
@@ -37,6 +36,7 @@ public class Trie {
         Queue<String> results = new LinkedList<>();
         TrieNode x = get(root, prefix, 0);
         collect(x, new StringBuilder(prefix), results);
+
         return results;
     }
 

@@ -66,7 +66,7 @@ public class CandyCrush {
             while (wr >= 0)
                 board[wr--][c] = 0;
         }
-
+//        show(board);
         return todo ? candyCrush(board) : board;
     }
     public void show(int[][] board) {

@@ -45,7 +45,7 @@ public class WordAbbreviation {
     }
     public  int minTimeToBuild1(String A, String B) {
         List<String> res = new ArrayList<>();
-        dfs1(new String(), 0, B ,res);
+        dfs1("", 0, B ,res);
         Collections.sort(res, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {

@@ -51,7 +51,80 @@ public class TextJustification {
         return res;
     }
 
+//    https://leetcode.com/problems/sentence-screen-fitting/description/
+    // LTE O(row * (rows * col/ average length))
+     public int wordsTyping(String[] sentence, int rows, int cols) {
+         int first = 0;
+         int time = 1;
+         int initRow = rows;
+         while(rows -- > 0){
+             if(first >= sentence.length){
+                 first = 0;
+                 time ++;
+             }
+             int last = first + 1;
+             if(last >= sentence.length){
+                 last = 0;
+                 time++;
+             }
+             int total = sentence[first].length();
+             if(total > cols){
+                 return 0;
+             }
+             while(total + sentence[last].length() + 1 <= cols){
+                 total += (sentence[last].length() + 1);
+                 last ++;
+                 if(last >= sentence.length){
+                     last = 0;
+                     time ++;
+                 }
+             }
+             if(last == sentence.length){
+                 return initRow/(initRow - rows) * time;
+             }
+
+                 first = last;
+         }
+         if(first != sentence.length){
+             time --;
+         }
+         return time;
+     }
+
+    // LTE O(max( row, N * (cols / average length)) )
+    public int wordsTyping2(String[] sentence, int rows, int cols) {
+        int N = sentence.length;
+        int[] nextIndex = new int[N];
+        int[] times = new int[N];
+        for(int i = 0; i < N; i ++){
+            int total = 0;
+            int last = i;
+            int time = 0;
+            while(total + sentence[last].length() <= cols){
+                total += (sentence[last].length() + 1);
+                last ++;
+                if(last == sentence.length){
+                    last = 0; time++;
+                }
+            }
+            times[i] = time;
+            nextIndex[i] = last;
+        }
+        int ans = 0;
+        int curr = 0;
+        for(int i = 0; i < rows; i ++){
+            ans += times[curr];
+            curr = nextIndex[curr];
+        }
+        return ans;
+    }
     public static void main(String[] args) {
+        Thread tHREA = new Thread(){
+                @Override
+                public void run(){
+                    System.out.println("");
+                }
+        };
         TextJustification t = new TextJustification();
         System.out.println(t.fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16));
     }

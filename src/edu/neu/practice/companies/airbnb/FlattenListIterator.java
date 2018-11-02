@@ -50,4 +50,8 @@ public class FlattenListIterator implements Iterator<Integer>{
         NestedInteger curr = stack.pop();
         return curr.getInteger();
     }
+
+//    public static void main(String[] args) {
+//        FlattenListIterator f = new FlattenListIterator
+//    }
 }
