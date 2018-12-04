@@ -15,7 +15,8 @@ public class HttpsGet {
         while ((line = rd.readLine()) != null) {
 //            System.out.println();
 //            System.out.print(line);
-            result.append(line);
+
+            result.append("\n" + line);
         }
         rd.close();
         return result.toString();

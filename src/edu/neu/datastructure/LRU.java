@@ -5,7 +5,6 @@ import java.util.*;
 public class LRU {
     class ListNode{
         int key;
-        int increment;
         int val;
         ListNode prev;
         ListNode next;
@@ -16,14 +15,14 @@ public class LRU {
     }
 
     HashMap<Integer, ListNode> map ;
-    int size;
+//    int size;
     int capacity;
     ListNode head;
     ListNode tail;
 
     public LRU(int capacity) {
         this.capacity = capacity;
-        size = 0;
+//        size = 0;
         map = new HashMap<>();
         head = new ListNode(0, 0);
         tail = new ListNode(0, 0);
@@ -32,16 +31,19 @@ public class LRU {
         head.prev = null;
         tail.next = null;
     }
+
     public void removeFromList(ListNode node){
         node.prev.next = node.prev;
         node.next.prev = node.next;
     }
+
     public void insertToHead(ListNode node){
         node.next = head.next;
         node.prev = head;
         head.next = node;
         node.next.prev = node;
     }
+
     public int get(int key) {
         ListNode node = map.get(key);
         if(node == null){
@@ -58,16 +60,17 @@ public class LRU {
         if(node == null){
             node = new ListNode(key, value);
             map.put(key, node);
-            if(size < capacity) {
-                size++;
-            }else {
-                map.remove(tail.prev.key);
-                removeFromList(tail.prev);
-            }
+//            if(size < capacity) {
+//                size++;
+//            }else {
         }else{
             node.val = value;
             removeFromList(node);
         }
         insertToHead(node);
+        if(map.size() > capacity){
+            map.remove(tail.prev.key);
+            removeFromList(tail.prev);
+        }
     }
 }
