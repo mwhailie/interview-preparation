@@ -45,19 +45,19 @@ public class SerializeDeserializeTree {
 
          String[] nodes = data.split(",");
          TreeNode root = new TreeNode(nodes[0]);
-         ArrayList<TreeNode> q = new ArrayList<>();
-         q.add(root);
+         ArrayList<TreeNode> list = new ArrayList<>();
+         list.add(root);
          int index = 0;
          boolean isLeftChild = true;
          for(int i = 1 ; i < nodes.length; i++){
              if(!nodes[i].equals("null")){
                  TreeNode node = new TreeNode(nodes[i]);
                  if(isLeftChild){
-                     q.get(index).left = node;
+                     list.get(index).left = node;
                  }else{
-                     q.get(index).right = node;
+                     list.get(index).right = node;
                  }
-                 q.add(node);
+                 list.add(node);
              }
              if(!isLeftChild){
                  index++;

@@ -1,4 +1,4 @@
-package edu.neu.companies.TripleByte;
+package edu.neu.companies.triplebyte;
 
 import java.util.Scanner;
 
