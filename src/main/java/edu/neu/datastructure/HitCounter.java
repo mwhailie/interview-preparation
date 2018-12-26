@@ -11,7 +11,6 @@ public class HitCounter {
     public HitCounter() {
         count = new int[300];
         timestamps = new int[300];
-//        Arrays.fill(timestamps, -300);
     }
 
     /** Record a hit.

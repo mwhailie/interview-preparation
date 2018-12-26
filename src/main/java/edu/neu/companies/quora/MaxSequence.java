@@ -44,10 +44,6 @@ public class MaxSequence {
             }
             dp[i][2] = Math.max(dp[i][0],dp[i][1]);
         }
-        for(int i = 0; i < dp.length; i ++){
-            System.out.println(Arrays.toString(dp[i]));
-
-        }
         return dp[nums.length - 1][2];
     }
 
