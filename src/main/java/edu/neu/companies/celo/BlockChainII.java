@@ -1,10 +1,8 @@
 package edu.neu.companies.celo;
 
-import java.security.*;
 import java.util.*;
 
-public class BlockChain {
-
+public class BlockChainII {
     class Block{
         String blockHash;
         String prevBlockHash;
@@ -15,9 +13,9 @@ public class BlockChain {
             this.prevBlockHash = prevBlockHash;
             this.blockTranscation = blockTranscation;
             this.nonce = 0;
-            this.blockHash = sha1(prevBlockHash + ", " + nonce + ", " + blockTranscation);
+            this.blockHash = sha1(prevBlockHash + ", " , nonce ,", " + blockTranscation);
             while(!blockHash.startsWith("0000")){
-                blockHash = sha1(prevBlockHash + ", " + (++nonce) + ", " + blockTranscation);
+                blockHash = sha1(prevBlockHash + ", " , (++nonce) , ", " + blockTranscation);
             }
         }
 
@@ -33,9 +31,9 @@ public class BlockChain {
         Block latestBlock = null;
         boolean invalid = false;
         int blockStart = 0;
-        for(; blockStart  < N; ){
+        for(; blockStart + blockSize <= N; ){
             int i = 0;
-            for(; i < blockSize && blockStart + i < N; i ++){
+            for(; i < blockSize; i ++){
                 int[] pendingTransaction = pendingTransactions[blockStart + i];
                 int fromAddress = pendingTransaction[0];
                 int toAddress = pendingTransaction[1];
@@ -49,11 +47,10 @@ public class BlockChain {
                 }
             }
             int[][] blockTransaction = Arrays.copyOfRange(pendingTransactions, blockStart, blockStart + i);
+            latestBlock = new Block(prevBlockHash, Arrays.deepToString(blockTransaction));
             if(invalid){
                 break;
             }
-            latestBlock = new Block(prevBlockHash, Arrays.deepToString(blockTransaction));
-
             prevBlockHash = latestBlock.blockHash;
             blockStart = blockStart + i;
         }
@@ -63,18 +60,24 @@ public class BlockChain {
         }
         return latestBlock.toString();
     }
-    private static String sha1(String text){
+
+    String sha1(String text, int nonce, String after) {
         String sha1 = "";
-        try{
-            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+        try
+        {
+            java.security.MessageDigest crypt = java.security.MessageDigest.getInstance("SHA-1");
             crypt.reset();
             crypt.update(text.getBytes("UTF-8"));
+            crypt.update((byte) nonce);
+            crypt.update(after.getBytes("UTF-8"));
             Formatter formatter = new Formatter();
-            for (byte b : crypt.digest()){
+            for (byte b : crypt.digest()) {
                 formatter.format("%02x", b);
             }
             sha1 = formatter.toString();
-        } catch(Exception e){
+        }
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
         return sha1;
@@ -83,9 +86,8 @@ public class BlockChain {
     public static void main(String[] args) {
         BlockChain bc = new BlockChain();
         System.out.println( bc.getLatestBlock(new int[]{5, 0, 0}, new int[][]{{0, 1, 5}, {1, 2, 5}},2));
-//        System.out.println( bc.getLatestBlock(new int[]{3, 10, 10, 3}, new int[][]{{3,2,2}, {2,3,5},{3,2,4}, {3,0,2}, {1,2,2}},2));
-//        System.out.println( bc.getLatestBlock(new int[]{1, 7}, new int[][]{{1,0,4}, {1,0,3}, {1,0,2}},2));
-//        System.out.println( bc.getLatestBlock(new int[]{5, 0, 0}, new int[][]{{0, 1, 5}, {1, 2, 5}, {2, 1, 5}},2));
+        System.out.println( bc.getLatestBlock(new int[]{3, 10, 10, 3}, new int[][]{{3,2,2}, {2,3,5},{3,2,4}, {3,0,2}, {1,2,2}},2));
+
 
     }
 }
