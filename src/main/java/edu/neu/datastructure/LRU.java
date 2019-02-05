@@ -60,9 +60,6 @@ public class LRU {
         if(node == null){
             node = new ListNode(key, value);
             map.put(key, node);
-//            if(size < capacity) {
-//                size++;
-//            }else {
         }else{
             node.val = value;
             removeFromList(node);
